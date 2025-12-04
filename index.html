@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>FSP</title>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3770451660837261"
+     crossorigin="anonymous"></script>
+  
+  <style>
+    :root{
+      --nav-bg:#2c3e50;
+      --nav-accent:#e67e22;
+      --card-bg:#ffffff;
+      --page-bg:#f5f5f5;
+      --menu-bg:#34495e;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:var(--page-bg);
+      color:#222;
+    }
+
+    /* NAVBAR */
+    .navbar{
+      background:var(--nav-bg);
+      color:white;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .logo{font-weight:700}
+
+    /* Hamburger icon (selalu tampak) */
+    .hamburger{
+      display:flex;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+      padding:8px;
+      border-radius:6px;
+    }
+    .hamburger div{
+      width:26px;
+      height:3px;
+      background:white;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .hamburger[aria-expanded="true"] .bar1{ transform: translateY(7px) rotate(45deg); }
+    .hamburger[aria-expanded="true"] .bar2{ opacity:0; }
+    .hamburger[aria-expanded="true"] .bar3{ transform: translateY(-7px) rotate(-45deg); }
+
+    /* Dropdown menu (hidden by default) */
+    .menu{
+      display:none;
+      position:absolute;
+      top:56px;
+      right:20px;
+      background:var(--menu-bg);
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,.15);
+      min-width:160px;
+      flex-direction:column;
+    }
+    .menu a{
+      color:white;
+      text-decoration:none;
+      padding:12px 16px;
+      display:block;
+      font-weight:600;
+    }
+    .menu a:hover{ background:var(--nav-accent); color:#fff; }
+
+    /* HERO area - gambar / dekorasi saja (tidak ada teks/judul) */
+    .hero{
+      height:45vh;
+      background: url('https://i.ibb.co/npmktn3/IMG-20251204-105921.jpg') center/cover no-repeat;
+      display:block;
+    }
+
+    /* content section */
+    .section{
+      padding:36px 20px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+      margin-top:18px;
+    }
+    .card{
+      background:var(--card-bg);
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,.08);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .card img{ width:100%; height:160px; object-fit:cover; }
+    .card-body{ padding:16px; flex:1; display:flex; flex-direction:column; }
+    .card-title{ font-weight:700; margin:0 0 8px; }
+    .card-text{ flex:1; margin:0 0 16px; color:#444; line-height:1.4; }
+    .card-actions{ padding:0 16px 16px; }
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+      text-align:center;
+      cursor:pointer;
+      border:none;
+      background:var(--nav-accent);
+      color:white;
+    }
+
+    /* footer */
+    footer{
+      padding:18px 20px;
+      text-align:center;
+      background:var(--nav-bg);
+      color:white;
+      margin-top:28px;
+    }
+
+    /* Responsiveness: on wide screens show menu as row near top-right (optional),
+       but the hamburger will still be visible. */
+    @media(min-width:768px){
+      .menu{
+        top:56px;
+        right:20px;
+        min-width:220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">FSP Hosting</div>
+
+    <!-- Hamburger (klik untuk buka/close menu) -->
+    <div class="hamburger" id="hamburger" role="button" aria-label="Buka menu" aria-expanded="false" tabindex="0">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+
+    <!-- Menu: isi akan dibuat oleh JS dari config -->
+    <nav class="menu" id="menu" aria-hidden="true"></nav>
+  </header>
+
+  <!-- Hero (tanpa teks / tombol) -->
+  <div class="hero" role="img" aria-label="Hero image dekoratif"></div>
+
+  <!-- Section dengan 2 card -->
+  <main class="section" id="home">
+    <h2>Menu per-Panelan</h2>
+
+    <div class="cards">
+      <article class="card">
+        <img src="https://i.ibb.co/npmktn3/IMG-20251204-105921.jpg" alt="Gambar produk 1">
+        <div class="card-body">
+          <h3 class="card-title">Free Panel</h3>
+          <p class="card-text">Dapatkan panel pterodactyl gratis.</p>
+        </div>
+        <div class="card-actions">
+          <!-- tombol diarahkan lewat JS (lihat config) -->
+          <a class="btn" id="cardBtn1" href="#" role="button">Dapatkan</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://i.ibb.co/npmktn3/IMG-20251204-105921.jpg" alt="Gambar produk 2">
+        <div class="card-body">
+          <h3 class="card-title">Login Panel</h3>
+          <p class="card-text">Klik login untuk masuk ke dalam panel.</p>
+        </div>
+        <div class="card-actions">
+          <a class="btn" id="cardBtn2" href="#" role="button">Login</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer id="kontak">
+    &copy; 2025 FSP Hosting
+  </footer>
+
+  <script>
+    /********* CONFIG: ganti link di sini sesuai kebutuhan *********/
+    const config = {
+      menu: [
+        { text: 'Saluran Whatsapp', href: 'https://whatsapp.com/channel/0029Vb2bXsrIHphBIvD8c52f' },
+        { text: 'Grup Whatsapp', href: 'https://chat.whatsapp.com/L91yUY7xGeMDNUdp0fVWlc?mode=hqrt2' },      // jika belum ada section, bisa pakai anchor atau url penuh
+        { text: 'Kontak', href: '#kontak' }
+      ],
+      cardLinks: [
+        'https://example.com/produk-1', // link untuk tombol Card 1
+        'https://premium.fajarsanespajar.web.id'  // link untuk tombol Card 2
+      ],
+      // Opsi: buka di tab baru? true = target="_blank"
+      openInNewTab: false
+    };
+    /************************************************************/
+
+    // Helper untuk membuat menu dari config
+    const menuEl = document.getElementById('menu');
+    function buildMenu() {
+      menuEl.innerHTML = ''; // reset
+      config.menu.forEach(item => {
+        const a = document.createElement('a');
+        a.textContent = item.text;
+        a.href = item.href || '#';
+        // jika mau buka di tab baru:
+        if(config.openInNewTab) a.target = '_blank';
+        // close menu saat klik
+        a.addEventListener('click', () => hideMenu());
+        menuEl.appendChild(a);
+      });
+    }
+
+    // Set tombol card ke link dari config
+    function applyCardLinks() {
+      const btn1 = document.getElementById('cardBtn1');
+      const btn2 = document.getElementById('cardBtn2');
+      if (config.cardLinks[0]) { btn1.href = config.cardLinks[0]; if(config.openInNewTab) btn1.target = '_blank'; }
+      if (config.cardLinks[1]) { btn2.href = config.cardLinks[1]; if(config.openInNewTab) btn2.target = '_blank'; }
+    }
+
+    // Menu toggle logic
+    const hamburger = document.getElementById('hamburger');
+    let menuOpen = false;
+    function showMenu(){
+      menuEl.style.display = 'flex';
+      menuEl.style.flexDirection = 'column';
+      menuEl.setAttribute('aria-hidden','false');
+      hamburger.setAttribute('aria-expanded','true');
+      menuOpen = true;
+    }
+    function hideMenu(){
+      menuEl.style.display = 'none';
+      menuEl.setAttribute('aria-hidden','true');
+      hamburger.setAttribute('aria-expanded','false');
+      menuOpen = false;
+    }
+    function toggleMenu(){
+      menuOpen ? hideMenu() : showMenu();
+    }
+
+    // close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!menuEl.contains(target) && !hamburger.contains(target) && menuOpen) {
+        hideMenu();
+      }
+    });
+
+    // keyboard accessibility (enter/space toggle)
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+
+    // init
+    buildMenu();
+    applyCardLinks();
+
+    // Optional: close menu on resize to avoid stuck state
+    window.addEventListener('resize', hideMenu);
+  </script>
+</body>
+</html>
